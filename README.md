@@ -168,6 +168,7 @@ what if we want to read a file and iterate it line by line and produce each thin
 --------------------------------------------------------------------------------------------------
 - check the above modified producer code
 
+- so far we have seen writing a producer code, that takes data line by line from a file and write to kafka topic
 - 
 
 
