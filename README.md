@@ -126,9 +126,49 @@ Programmatic Approach of Implementing Kafka Retail Use-Case
 - when you call poll the producer checks for asynchronous events that needed to be processed. These events include acknowledgement from brokers for message sent, error
   
 - To initiate sending message to kafka, call produce method passing in a message value its mandatory (topic,key, value, callback method, in which partition we want to put)
-- **flush should be called before shutting down the producer to ensure all outstanding messages in transit are delivered**
-- 
+- **flush should be called before shutting down the producer to ensure all outstanding/queued/in-flight messages in transit are delivered**
+-
+```
+from confluent_kafka import Producer
+import json
+conf = {
+    'bootstrap.servers': 'pkc-abcd85.us-west-2.aws.confluent',
+    'security.protocol': 'SASL_SSL',
+    'sasl.mechanism': 'PLAIN',
+    'sasl.username': '<CLUSTER_API_KEY>',
+    'sasl.password': '<CLUSTER_API_SECRET>',
+    'client.id': 'pooja windows'
+}
 
+producer  = Producer(conf)
+
+customer_id = "11599"
+customer_details = '{"{"order_id":1,"customer_id":11599,"customer_fname":"Mary","customer_lname":"Malone","city":"Hickory","state":"NC","pincode":28601,"line_items":[{"order_item_id":1,"order_item_product_id":957,"order_item_quantity":1,"order_item_product_price":299.98,"order_item_subtotal":299.98}]}"}'
+
+def acked(err,msg):
+    if err is not None:
+        print(f"Failed to deliver message: {err}")
+    else:
+        msg_key = msg.key().decode('utf-8')
+        msg_value = msg.value().decode('utf-8') #to remove b in the output added decode
+        print("Message produced:" key is {msg_key} and value is {msg_value}")
+
+with open('/user/desktop/trendytech/orders_input.json', 'r') as file:
+for line in file:
+     order = json.loads(line) #mapping the each line to a json to extract each field out of it
+    customer_id = str(order["customer_id"])
+    producer.produce(topic: "retail-data-new",key=customer_id,value=line)
+
+producer.poll(1)
+
+producer.flush()
+```
+
+what if we want to read a file and iterate it line by line and produce each thing as a message
+--------------------------------------------------------------------------------------------------
+- check the above modified producer code
+
+- 
 
 
 
