@@ -100,7 +100,71 @@ Practice Kafka
 
 Programmatic Approach of Implementing Kafka Retail Use-Case
 --------------------------------------------------------------------
+- Industries use programmatic approach
+- consider there is a retail chain: walmart store
+- A lot of transactions are happening over the walmart store - if you make a order there will be multiple line items because one order contains multiple items
+- when someone is making a transaction, this retail organization sends this transaction to a kafka topic
+- since we don't have machines which generate transactions and all 
+- we are simulating the same approach, we have a file, I'll read it line by line, produce it to my kafka topic.
+- we will write a python code (python producer) that takes the data in the file line by line and produce it
+- someone asked to do analysis on customer_id, we want output like
+- customer_id    total_orders    total_line_items    total_amount
+- 11599             5                         18        2000
+
+- Open Pycharm - create a new project (kafka project) - create a new file(myproducer.py)
+- Fill the config values
+- bootstrap server value -> get it from your kafka cluster settings
+- username, pw -> get it from API Keys section
+- **Asynchronous - if we are producing 200 messages, it will not wait for first message to get produced and wait for acknowledgement, it will keep producing messages.**
+- ``` producer.produce(topic: "retail-data-new",key=customer_id,value=customer_details, callback = acked) ```
+- In case if we want to do something - we can call callback method and write something say if a message is successful, we can show a message
+-**callbacks** - is to check and post the acknowledgements
+- when we put something to kafka topic it will serialize it, that means it will convert to bytes and put it across, it goes in a serialized manner, we have to convert it to str(msg)
+- whenever we use a callback, we should be using a poll
+- ```producer.poll(1) 1 is timeout```
+- whenever we call the produce(), it puts the message in the producers pending buffer, it will asynchronously dispatch those messages, what it will then not do by itself is called callback functions
+- when you call poll the producer checks for asynchronous events that needed to be processed. These events include acknowledgement from brokers for message sent, error
+  
+- To initiate sending message to kafka, call produce method passing in a message value its mandatory (topic,key, value, callback method, in which partition we want to put)
+- **flush should be called before shutting down the producer to ensure all outstanding messages in transit are delivered**
 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
