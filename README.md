@@ -169,8 +169,9 @@ what if we want to read a file and iterate it line by line and produce each thin
 - check the above modified producer code
 
 - so far we have seen writing a producer code, that takes data line by line from a file and write to kafka topic
-- 
 
+
+- **Bootstrap servers**: if we have 100 node cluster, no need to give all broker list, give 3-4 list and atleast if one fails, it can route back to 1st one, as soon as the client connects to one it gets all metadata - all brokers available, topics, location of brokers
 
 
 
