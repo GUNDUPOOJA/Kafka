@@ -77,8 +77,29 @@ Kafka as a Data Integration platform and basic terminologies
 - In traditional messaging systems - if there is 1 producer which produces data, if consumer consumes data, data is gone, no else can consume it
 - But in kafka we can have multiple consumers, data will still be kept intact even if 1 consumer consume data (1 producer - multiple consumers)
 - Data is retained for a period of 7 days
-----------------------------------------------------
--  
+
+Practice Kafka
+--------------------
+- Kafka practice in confluent website
+- Create a environment (there is default environment) , dev,stage, prod
+- Inside environment you create clusters
+- default -> cluster1, cluster2
+- Inside cluster - you create a topic
+- **environment ->  cluster -> topic**
+  
+- **Every message needs 2 things : key and value (Timestamp takes automatically)**
+- In orders.json take first order_id and format it properly **using Json formatter website**
+- <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/405d9c1c-987b-4a0e-9815-3362928a78b1" />
+- Make customer_id as the key so same customer_ids fall in same partitions
+- <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/5c906fbb-48f5-4fac-9553-491f8cbbf278" />
+- In key field give 11599, value (copy all the json)
+- Here partition is 0 and offset is 0, this is calculated based on a hash function
+- <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/0b7ea606-da9c-4672-975c-83ce2185ae7f" />
+- we can also do the above same process using cli commands (check confluent website)
+- we have seen Graphical way of working on kafka, cli way how to connect to environment, create env, connect to cluster, create topic, reading topic, starting a consumer, starting a producer, create diff number of partitions
+
+Programmatic Approach of Implementing Kafka Retail Use-Case
+--------------------------------------------------------------------
 - 
 
 
