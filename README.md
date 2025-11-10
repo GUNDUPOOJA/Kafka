@@ -190,7 +190,18 @@ Connecting to Kafka topic - Read and persist the data
 
 How to convert the above code to streaming (Logic to persist the data in Delta table from kafka source)
 -----------------------------------------------------------------------------------------------------------
+- we are going to write a streaming job that connects to kafka source and we write it back to a delta table
+- Source -> Kafka
+- Target -> Delta table
+- Refer kafka consumer streaming notebook
+- If you see the table the value field has multiple line items, while reading from the kafka source itself we could have clean and flatten the data, so that clean data would be stored in delta table
+- <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/95f5dd5b-1bfe-40af-b02b-29974685dcae" />
+
+Persist cleaned and formatted data to delta table
+--------------------------------------------------
 - 
+
+
 
 
 
