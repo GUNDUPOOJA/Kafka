@@ -170,11 +170,27 @@ what if we want to read a file and iterate it line by line and produce each thin
 
 - so far we have seen writing a producer code, that takes data line by line from a file and write to kafka topic
 
-
 - **Bootstrap servers**: if we have 100 node cluster, no need to give all broker list, give 3-4 list and atleast if one fails, it can route back to 1st one, as soon as the client connects to one it gets all metadata - all brokers available, topics, location of brokers
 
+Connecting to Kafka topic - Read and persist the data 
+---------------------------------------------------------
+- so far we have seen how do we produce data to a kafka topic, we have seen plain python producer and we did it from a local system
+- we set various configurations and try to write it using producer API
+- In this producer, we have this file - 57431 lines and take each line at a time, write it as a key value pair
+- kafka topic name is : retail-data-new
+- write a consumer program to read the data from topic, put it to a disk or table so the data will be persistent, so we can use it later
+- open databricks cluster - we have to talk to confluent from here - click on libraries - install new - select PyPI - in package mention this
+- ```confluent-kafka[avro,json,protobuf]>=1.4.2```
+- Now open a new notebook - refer kafka consumer notebook
+- <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/f8cebdff-a582-4ad6-8786-6dd73be2a5cb" />
+- There are 2 timestamps
+  1. **event timestamp** - time at which actual event is generated
+  2. **timestamp type** - when the event comes to kafka broker
+- key and value fields are in binary format, so we can't read it
 
-
+How to convert the above code to streaming (Logic to persist the data in Delta table from kafka source)
+-----------------------------------------------------------------------------------------------------------
+- 
 
 
 
