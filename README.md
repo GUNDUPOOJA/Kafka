@@ -199,9 +199,20 @@ How to convert the above code to streaming (Logic to persist the data in Delta t
 
 Persist cleaned and formatted data to delta table
 --------------------------------------------------
+- Refer order streaming2 notebook
+
+Kafka producer using pyspark
+---------------------------------
+- Here will see how to write producer using pyspark
+- someone might tell you just process this data using kafka sync - we will take it from topic
+- Ideally the flow can be - you read data from kafka topic (write own pyspark consumer) - write the results to bronze layer(persistent storage - dbfs, hdfs, delta format)
+- you should take this persistent storage - do processing filtering, aggregations and then you can write to a kafka topic
+- earlier we thought terminals produce data -> wrote python producer (produces data to a topic) -> read data from a topic( then we use pyspark kafka consumer) -> put it to a persistent storage -> now we are doing processing -> to put the data back (pyspark kafka rather than plain python)
+- we can read from persistent storage do filtering on the go and write it back
+- But here we are reading from consumer - do filtering and then write it back
+- Filtering criteria is where city = 'chicago'
+- Refer kafka producer streaming notebook
 - 
-
-
 
 
 
